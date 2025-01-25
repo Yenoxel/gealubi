@@ -10,7 +10,7 @@ Event script (when you save document) for geanylua plugin, for Geany IDE source 
 ## Dependencies:
 - Geany IDE [geany.org](https://www.geany.org/) version 2.0.0
   - geanylua [plugin](https://plugins.geany.org/geanylua/geanylua-index.html)
-- Luarocks [link](https://luarocks.org/](https://github.com/luarocks/luarocks/wiki/Download)
+- Luarocks [link](https://github.com/luarocks/luarocks/wiki/Download)
   - Luacheck [link](https://github.com/lunarmodules/luacheck)
   - And sub-dependencies which auto installed after luacheck install:
     - LuaFileSystem 1.8.0-1 [link](https://luarocks.org/modules/hisham/luafilesystem)
