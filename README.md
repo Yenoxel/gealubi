@@ -35,6 +35,8 @@ $ luarocks --local install luacheck
 ````markdown
 /home/username/.config/luacheck/
 ````
-[how-to](https://luacheck.readthedocs.io/en/stable/config.html)
+[how-to create config file](https://luacheck.readthedocs.io/en/stable/config.html)
+## How to use:
+Just write your lua script as usual and then press Ctrl+S (save). After saving the lua file, script run luacheck on your file, extracts warnings (and errors) and draws it's in boxes under problematic lines.
 ## Bugs:
 Only last two warnings texts will be displayed per one line. Needs to work on 'merge_lines_with_exceptions_text()' function.
