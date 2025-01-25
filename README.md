@@ -19,6 +19,7 @@ Event script (when you save document) for geanylua plugin, for Geany IDE source 
 - Linux OS
   - But it's possible to adapt only one function named 'luacheck_report()' by changing paths to luacheck program. Rest of the script should works same on any platform. (Where luacheck works)
 ## How to install:
+1. Luarocks and Luacheck(with dependencies)
 Voidlinux users:
 ````markdown
 ```bash
@@ -26,3 +27,14 @@ $ sudo xbps-install -Su luarocks-lua53
 $ luarocks --local install luacheck
 ```
 ````
+2. Copy script 'saved.lua' into:
+````markdown
+/home/username/.config/geany/plugins/geanylua/events/
+````
+3. Create '.luacheckrc' file and put it on:
+````markdown
+/home/username/.config/luacheck/
+````
+[how-to](https://luacheck.readthedocs.io/en/stable/config.html)
+## Bugs:
+Only last two warnings texts will be displayed per one line. Needs to work on 'merge_lines_with_exceptions_text()' function.
