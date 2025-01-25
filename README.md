@@ -20,8 +20,8 @@ Event script (when you save document) for geanylua plugin, for Geany IDE source 
   - But it's possible to adapt only one function named 'luacheck_report()' by changing paths to luacheck program. Rest of the script should works same on any platform. (Where luacheck works)
 ## How to install:
 Voidlinux users:
-'''markdown
-''bash
+```markdown
+``bash
 sudo xbps-install -Su luarocks-lua53
-''
-;;;
+``
+```
