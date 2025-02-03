@@ -23,7 +23,7 @@ Monokai geany colorscheme:
   - But it's possible to adapt only one function named 'luacheck_report()' by changing paths to luacheck program. Rest of the script should works same on any platform. (Where luacheck works)
 ## How to install:
 1. Luarocks and Luacheck(with dependencies)
-Voidlinux users:
+- Voidlinux users:
 ````markdown
 $ sudo xbps-install -Su luarocks-lua53
 $ luarocks --local install luacheck
@@ -32,7 +32,12 @@ $ luarocks --local install luacheck
 ````markdown
 /home/username/.config/geany/plugins/geanylua/events/
 ````
-3. Create '.luacheckrc' file and put it on:
+3. Copy script 'gealubi.lua' into:
+````markdown
+/home/username/.config/geany/plugins/geanylua/support/
+````
+3.1 If folders (events and support) not exist. Just create them.
+4. Create '.luacheckrc' file and put it on:
 ````markdown
 /home/username/.config/luacheck/
 ````
@@ -40,4 +45,4 @@ $ luarocks --local install luacheck
 ## How to use:
 Just write your lua script as usual and then press Ctrl+S (save). After saving the lua file, script run luacheck on your file, extracts warnings (and errors) and draws it's in boxes under problematic lines.
 ## Bugs:
-Only last two warnings texts will be displayed per one line. Needs to work on 'merge_lines_with_exceptions_text()' function.
+If you found something, let me know in Issues, ok?
