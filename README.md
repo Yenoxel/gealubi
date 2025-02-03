@@ -46,3 +46,5 @@ $ luarocks --local install luacheck
 Just write your lua script as usual and then press Ctrl+S (save). After saving the lua file, script run luacheck on your file, extracts warnings (and errors) and draws it's in boxes under problematic lines.
 ## Bugs:
 If you found something, let me know in Issues, ok?
+## Alternate repository:
+[codeberg.org](https://codeberg.org/Yeleaf/gealubi)
