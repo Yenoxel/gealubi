@@ -6,7 +6,9 @@ Geanylua event script for auto popup anntations with described errors on each li
 ## Long Description:
 Event script (when you save document) for geanylua plugin, for Geany IDE source code editor. Script for lua language developers. Useful for printing luacheck's warnings text directly into the code window by creating annotation box under problematic lines.
 ## Screenshoot:
+Default geany colorscheme:
 ![preview](https://github.com/Yenoxel/gealubi/blob/main/geany-default-colorscheme-luacheck-warnings.png)
+Monokai geany colorscheme:
 ![preview2](https://github.com/Yenoxel/gealubi/blob/main/geany-monokai-colorscheme-luacheck-warnings.png)
 ## Dependencies:
 - Geany IDE [geany.org](https://www.geany.org/) version 2.0.0
