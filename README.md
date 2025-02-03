@@ -36,7 +36,7 @@ $ luarocks --local install luacheck
 ````markdown
 /home/username/.config/geany/plugins/geanylua/support/
 ````
-  3.1 If folders (events and support) not exist. Just create them.
+- If folders (events and support) not exist. Just create them.
 4. Create '.luacheckrc' file and put it on:
 ````markdown
 /home/username/.config/luacheck/
