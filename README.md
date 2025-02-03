@@ -6,7 +6,8 @@ Geanylua event script for auto popup anntations with described errors on each li
 ## Long Description:
 Event script (when you save document) for geanylua plugin, for Geany IDE source code editor. Script for lua language developers. Useful for printing luacheck's warnings text directly into the code window by creating annotation box under problematic lines.
 ## Screenshoot:
-![preview](https://github.com/Yenoxel/gealubi/blob/main/Screenshot_2025-01-25_18-26-49.png)
+![preview](https://github.com/Yenoxel/gealubi/blob/main/geany-default-colorscheme-luacheck-warnings.png)
+![preview2](https://github.com/Yenoxel/gealubi/blob/main/geany-monokai-colorscheme-luacheck-warnings.png)
 ## Dependencies:
 - Geany IDE [geany.org](https://www.geany.org/) version 2.0.0
   - geanylua [plugin](https://plugins.geany.org/geanylua/geanylua-index.html)
@@ -22,10 +23,8 @@ Event script (when you save document) for geanylua plugin, for Geany IDE source 
 1. Luarocks and Luacheck(with dependencies)
 Voidlinux users:
 ````markdown
-```bash
 $ sudo xbps-install -Su luarocks-lua53
 $ luarocks --local install luacheck
-```
 ````
 2. Copy script 'saved.lua' into:
 ````markdown
