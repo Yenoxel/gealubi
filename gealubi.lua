@@ -1,35 +1,54 @@
+--[[
 -- Filename: gealubi.lua
--- ## Place this file into:
--- ## 	For UNIX: $HOME/.config/geany/plugins/geanylua/support
--- ##	For Windows: ? Need MS-Windows users help.
--- Script name: gealubi (geany luacheck bindings)
--- Version 0.2.0-alpha
--- Author: Yeleaf(Yenoxel)
--- Link: https://github.com/Yenoxel/gealubi
--- First date: 2025-01-22
--- Time: 19:50
+-- Version 0.3.0-alpha
+-- Update date: 05.02.2025 12:11:24
+-- Script name defenition: gealubi (geany luacheck bindings)
+-- Description: Auto popup annotations with described errors on each line where problem ocurrs.
+-- Author: Yeleaf (Yenoxel)
+-- Link 1: https://codeberg.org/Yeleaf/gealubi/src/branch/main/gealubi.lua
+-- Link 2: https://github.com/Yenoxel/gealubi/blob/main/gealubi.lua
+-- First date created: 2025-01-22
 -- License: GPL-2.0
--- Adopted for linux OS, but with few tweaks can work on windows too. (And Mac?)
--- Dependencies: >= Geany 2.0; Luacheck 1.2.0-1 (Luarocks 5.3, LuaFileSystem 1.8.0-1, lanes 3.17.0-0, argparse 0.7.1-1)
--- Install luacheck in home directory. Like:
--- 		> luarocks --local install luacheck
--- 		sudo not need
--- Description: Auto popup anntations with described errors on each line where problem ocurrs.
+--
+-- ## Place this file into:
+-- ## 	For UNIX: $HOME/.config/geany/plugins/geanylua/support/
+-- ##	For MS-Windows: C:\users\username\AppData\Roaming\geany\plugins\geanylua\support\
+--
+-- For UNIX users:
+-- 		Dependencies:
+-- 			Geany >= 2.0; Geanylua plugin; Lua5.4; Luarocks 5.3;
+-- 			Luacheck 1.2.0-1; LuaFileSystem 1.8.0-1; lanes 3.17.0-0; argparse 0.7.1-1)
+-- Install luacheck in home directory. (without sudo) Like:
+-- 		$ luarocks --local install luacheck
+--
+-- For MS-Windows users:
+--		Dependencies:
+--			Geany >=2.0; geany-plugins-2.0.exe; Luacheck.exe( already bundled with Lua and rest dependencies );
+--			Download link for luacheck (https://github.com/mpeterv/luacheck/releases/download/0.23.0/luacheck.exe)
+--
+-- Important for:
+-- 		MS-Windows users: to change variable 'gealubi.windows_luacheck_path' to set path to your luacheck application.
+--
 -- Optional tweaks: Change verbosity variable (true/false) for enabling or disabling intermidiate data of script work.
-
--- ## Create file .luacheckrc:
--- ## Filename: .luacheckrc
--- ## Filepath: $HOME/.config/luacheck
+--
+-- Optional step, for those, who wants to control luacheck warnings:
+-- ## How-to create luacheck config file: (https://luacheck.readthedocs.io/en/stable/config.html)
+-- ## Create file: '.luacheckrc'
+-- ## And place it into:
+-- ## For UNIX OS:
 -- ## Finalpath: /home/username/.config/luacheck/.luacheckrc
+-- ## For MS-Windows OS:
+-- ## Finalpath: C:\users\username\AppData\Local\Luacheck\.luacheckrc
 -- ## And put two lines below into that file. That config used for gealubi script, to be checked via luacheck.
 -- max_line_length = 120
 -- globals = {"geany"}
-
+]]
 local gealubi = {}
-gealubi.windows_luacheck_path = "C:\\app\\luacheck\\bin\\luacheck" --Example of absolute path to luacheck in windows os.
+--Example of absolute path to luacheck in windows os. Paste your path to luacheck in double brackets: [["path_to_app"]]
+gealubi.windows_luacheck_path = [["C:\Program Files\Lua\luacheck.exe"]]
 gealubi.gs = geany.scintilla
 gealubi.st = geany.status
-gealubi.verbosity = false -- On or off. For additional debug prints
+gealubi.verbosity = false -- On or off. For additional debug prints.
 
 function gealubi.clear_all_annotations()
 	gealubi.gs("SCI_ANNOTATIONCLEARALL") -- Clear all annotations
@@ -37,27 +56,18 @@ function gealubi.clear_all_annotations()
 end
 
 function gealubi.luacheck_report()
-	local home_path = os.getenv("HOME") --> /home/username
-	local app_path1 = ".luarocks"
-	local app_path2 = "bin"
-	local app_name = "luacheck"
 	local dirsep = geany.dirsep -- Get directory separator symbol: '/' - for unix '\' - for MS-Windows
-	local linter = string.format("%s%s%s%s%s%s%s",
-			home_path,
-			dirsep,
-			app_path1,
-			dirsep,
-			app_path2,
-			dirsep,
-			app_name)
 	local file_name = geany.filename() -- get filename with full path
-	local no_color = "NO_COLOR=1 " -- Disable luacheck's ascii color codes, for clear output.
-	local unix_luacheck = no_color .. linter .. " " .. file_name .. " --ranges"
-	-- NOT TESTED. Needs windows user to test code below:
-	local windows_luacheck = no_color .. gealubi.windows_luacheck_path .. " " .. file_name .. " --ranges"
+	local no_color = "NO_COLOR=1 " -- Disable luacheck's ascii color codes, for clear output. MS-Windows works without.
 	local windows_dirsep = "\\"
 	local unix_dirsep = "/"
 	if dirsep == unix_dirsep then -- If unix users.
+		local home_path = os.getenv("HOME") --> /home/username
+		local app_path1 = ".luarocks"
+		local app_path2 = "bin"
+		local app_name = "luacheck"
+		local linter = string.format("%s%s%s%s%s%s%s",home_path, dirsep, app_path1, dirsep, app_path2, dirsep, app_name)
+		local unix_luacheck = no_color .. linter .. " " .. file_name .. " --ranges"
 		local output = io.popen(unix_luacheck , "r")
 		-- Store each output messages from luacheck in table.
 		local lines = {}
@@ -65,6 +75,9 @@ function gealubi.luacheck_report()
 		output:close()
 		return lines
 	elseif dirsep == windows_dirsep then -- If MS-Windows users.
+		-- That was hard to figure out how to pass correctly the paths. Was needed using extra quotes (")
+		--local windows_luacheck = string.format('"\"%s" "%s"\" --ranges', gealubi.windows_luacheck_path, file_name)
+		local windows_luacheck = string.format('\"%s \"%s\"\" --ranges', gealubi.windows_luacheck_path, file_name)
 		local output = io.popen(windows_luacheck , "r")
 		-- Store each output messages from luacheck in table.
 		local lines = {}
@@ -189,6 +202,7 @@ end
 
 function gealubi.popup_all_annotations()
 	local exceptions_line_with_text = gealubi.merge_lines_with_exceptions_text()
+	gealubi.st("Total number of problematic lines:" .. #exceptions_line_with_text)
 	for i = 1, #exceptions_line_with_text do
 		local line = exceptions_line_with_text[i][1]
 		local text = exceptions_line_with_text[i][2]
@@ -239,7 +253,7 @@ function gealubi.print_extracted_line_and_ranges()
 		gealubi.st("print_extracted_line_and_ranges_end;")
 end
 
-function gealubi.tell_me_more(verbosity)
+function gealubi.tell_me_more()
 	if not gealubi.verbosity then gealubi.st("gealubi.verbosity setted to false. Skiping debug information(faster)") end
 	if gealubi.verbosity then
 		gealubi.st("START==================================================================VERBOSITY")
@@ -266,13 +280,71 @@ function gealubi.lua_source_file()
 	end
 end
 
-function gealubi.run()
-	if gealubi.lua_source_file() then
-		gealubi.tell_me_more(gealubi.verbosity)
-		-- Clear old annotations to set new if warnings occurs.
-		gealubi.clear_all_annotations()
-		gealubi.popup_all_annotations()
+function gealubi.is_windows_luacheck_found()
+	local app_found = false
+	-- Check if current file can be parsed by luacheck:
+	local status = os.execute('"' .. gealubi.windows_luacheck_path .. ' "' .. geany.filename() .. '"')
+		if status ~= 9009 then
+			gealubi.st("Success! Luacheck found at: " .. gealubi.windows_luacheck_path)
+			app_found = true
+			if status == 0 then
+				gealubi.st("Luacheck says: no warnings or errors occurred." ..
+					" Exit code is: " .. status)
+			elseif status == 1 then
+				gealubi.st("Luacheck says: some warnings occurred but there were no syntax errors or invalid inline options." ..
+					" Exit code is: " .. status)
+			elseif status == 2 then
+				gealubi.st("Luacheck says: some syntax errors or invalid inline options." ..
+					" Exit code is: " .. status)
+			elseif status == 3 then
+				gealubi.st("Luacheck says: files couldn’t be checked, typically due to an incorrect file name." ..
+					" Exit code is: " .. status)
+			elseif status == 4 then
+				gealubi.st("Luacheck says: there was a critical error (invalid CLI arguments, config, or cache file)." ..
+					" Exit code is: " .. status)
+			end
+		elseif status == 9009 then -- Can't recognize 'app name' as an internal or external command, or batch script.
+			gealubi.st("Where your luacheck.exe? That path is correct: " ..
+				gealubi.windows_luacheck_path .." ? Exit code is: " .. status)
+			app_found = false
+		end
+	return app_found
+end
+
+function gealubi.is_windows()
+	local current_dirsep = geany.dirsep -- Get directory separator.
+	local windows_dirsep = "\\" -- \ for MS-Windows.
+	if current_dirsep == windows_dirsep then
+		return true
+	else
+		return false
 	end
 end
 
-return gealubi
+function gealubi.is_unix()
+	local current_dirsep = geany.dirsep -- Get directory separator.
+	local unix_dirsep = "/" -- / for unix OS
+	if current_dirsep == unix_dirsep then
+		return true
+	else
+		return false
+	end
+end
+
+function gealubi.run()
+	if gealubi.lua_source_file() then -- Is current file have .lua extension?
+		if gealubi.is_windows() then -- If MS-Windows current Operating System.
+			if gealubi.is_windows_luacheck_found() then -- Is luacheck application found? (For MS-Windows works for now)
+				gealubi.tell_me_more()
+				gealubi.clear_all_annotations()
+				gealubi.popup_all_annotations()
+			end
+		elseif gealubi.is_unix() then -- If Unux is current operating system.
+			gealubi.tell_me_more()
+			gealubi.clear_all_annotations()
+			gealubi.popup_all_annotations()
+		end
+	end
+end
+
+return gealubi -- Return module for 'saved.lua'
