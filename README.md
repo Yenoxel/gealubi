@@ -12,9 +12,9 @@ Monokai geany colorscheme:
 ![preview2](https://github.com/Yenoxel/gealubi/blob/main/geany-monokai-colorscheme-luacheck-warnings.png)
 ## Dependencies:
 ### VoidLinux OS:
-````markdown
-$ sudo xbps-install -Su geany
-$ sudo xbps-install -Su geany-plugins-extra
+````bash
+sudo xbps-install -Su geany
+sudo xbps-install -Su geany-plugins-extra
 ````
 ### MS-Windows:
 - Official site: [geany.org](https://www.geany.org/download/releases/)
