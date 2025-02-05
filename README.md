@@ -57,7 +57,7 @@ $ luarocks --local install luacheck
 [how-to create config file](https://luacheck.readthedocs.io/en/stable/config.html)
 ### MS-Windows users:
 1. Luacheck app:
-For Windows there is single-file 64-bit binary distribution, bundling Lua 5.3.4, Luacheck, LuaFileSystem, and LuaLanes using: [LuaStatic](https://github.com/ers35/luastatic): [download binary](https://github.com/mpeterv/luacheck/releases/download/0.23.0/luacheck.exe)
+For Windows there is single-file 64-bit binary distribution, bundling Lua 5.3.4, Luacheck, LuaFileSystem, and LuaLanes using: [LuaStatic](https://github.com/ers35/luastatic): [download binary](https://github.com/lunarmodules/luacheck/releases/download/v1.2.0/luacheck.exe)
 2. Copy script 'saved.lua' into:
 ````markdown
 C:\users\username\AppData\Roaming\geany\plugins\geanylua\events\
