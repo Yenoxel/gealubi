@@ -29,13 +29,13 @@ Tools > Plugin Manager > Lua Script
 ### UNIX users:
 - Voidlinux OS:
 1. Lua
-````markdown
-$ sudo xbps-install -Su lua53
+````bash
+sudo xbps-install -Su lua53
 ````
 2. Luarocks and Luacheck(with dependencies)
-````markdown
-$ sudo xbps-install -Su luarocks-lua53
-$ luarocks --local install luacheck
+````bash
+sudo xbps-install -Su luarocks-lua53
+luarocks --local install luacheck
 ````
 - luacheck binary must be in:
 ````markdown
