@@ -18,6 +18,7 @@ Choose your language/Выбери свой язык:
 * [How-to use](#how-to-use)
 * [Bugs](#bugs)
 * [Contributing](#contributing)
+* [Alternate repository](#alternate-repository)
 ## Name:
 gealubi stands for: geany luacheck bindings
 ## Short Description:
@@ -146,5 +147,6 @@ Just write your lua script as usual and then press Ctrl+S (save). After saving t
 If you found something, let me know in Issues, ok?
 ## Contributing:
 Feel free to contribute bugs, suggestion, ideas or more optimized lua code in 'Issues' or Pull Request.
-
+## Alternate repository:
+Using [codeberg.org](https://codeberg.org/Yeleaf/gealubi) ?
 * [GO UP ^](#gealubi)
