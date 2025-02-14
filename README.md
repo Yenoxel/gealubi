@@ -1,6 +1,6 @@
 # gealubi
 Choose your language/Выбери свой язык:
-- English/[Русский](https://codeberg.org/Yeleaf/gealubi/src/branch/main/%D0%9F%D0%A0%D0%9E%D0%A7%D0%A2%D0%98-%D0%9C%D0%95%D0%9D%D0%AF.md)
+- English/[Русский](https://github.com/Yenoxel/gealubi/blob/main/%D0%9F%D0%A0%D0%9E%D0%A7%D0%A2%D0%98-%D0%9C%D0%95%D0%9D%D0%AF.md)
 ## Contents:
 * [Name](#name)
 * [Short Description](#short-description)
@@ -26,9 +26,9 @@ Geanylua event script for auto popup annotations with described errors on each l
 Event script (when you save document) for geanylua plugin, for Geany IDE source code editor. Script for lua language developers. Useful for printing luacheck's warnings text directly into the code window by creating annotation box under problematic lines.
 ## Screenshoots:
 - Default geany colorscheme:
-![preview](https://codeberg.org/Yeleaf/gealubi/src/branch/main/geany-default-colorscheme-luacheck-warnings.png)
+![preview](https://github.com/Yenoxel/gealubi/blob/main/geany-default-colorscheme-luacheck-warnings.png)
 - Monokai geany colorscheme:
-![preview2](https://codeberg.org/Yeleaf/gealubi/src/branch/main/geany-monokai-colorscheme-luacheck-warnings.png)
+![preview2](https://github.com/Yenoxel/gealubi/blob/main/geany-monokai-colorscheme-luacheck-warnings.png)
 ## Dependencies:
 ### VoidLinux OS:
 ````markdown
